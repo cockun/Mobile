@@ -28,36 +28,36 @@ export function FooterDetail() {
         <View
           style={[styles.flex1, { paddingVertical: 1, paddingHorizontal: 5 }]}
         >
-          <TouchableNativeFeedback style={{ flex: 1 }}>
-            <LinearGradient
-              colors={['#f1ec5f', '#ecb055']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0.5 }}
-              style={[styles.button, styles.flexCenter, { flex: 1 }]}
-            >
+          <LinearGradient
+            colors={['#f1ec5f', '#ecb055']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0.5 }}
+            style={[styles.button, styles.flexCenter, { flex: 1 }]}
+          >
+            <TouchableOpacity style={[styles.flexCenter, { flex: 1 }]}>
               <Text style={{ backgroundColor: 'transparent', fontSize: 15 }}>
                 Mua ngay
               </Text>
-            </LinearGradient>
-          </TouchableNativeFeedback>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
         <View
           style={[styles.flex1, { paddingVertical: 1, paddingHorizontal: 5 }]}
         >
-          <TouchableOpacity style={{ flex: 1 }}>
-            <LinearGradient
-              colors={['#ecb055', '#ea6d23']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0.5 }}
-              style={[styles.button, styles.flexCenter, { flex: 1 }]}
-            >
+          <LinearGradient
+            colors={['#ecb055', '#ea6d23']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0.5 }}
+            style={[styles.button, styles.flexCenter, { flex: 1 }]}
+          >
+            <TouchableOpacity style={{ flex: 1 }}>
               <View style={[styles.flex1, styles.flexCenter, { padding: 10 }]}>
                 <Text style={{ fontSize: 15, textAlign: 'center' }}>
                   Thêm vào giỏ hàng
                 </Text>
               </View>
-            </LinearGradient>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
       </View>
     </View>

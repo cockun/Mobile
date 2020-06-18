@@ -15,13 +15,14 @@ import FontAwesome5 from 'react-native-vector-icons/MaterialIcons';
 import freeshipImg from '../image/freeship.png';
 import { FooterDetail } from './footerDetail';
 import { ModalView } from './modalView';
+import { Helper } from '../utils/helper';
 
 export default function Detail({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const handleModal = () => {
     setModalVisible(!modalVisible);
   };
-  console.log(route.params.item);
+
   const { item } = route.params;
   return (
     <View style={styles.flex1}>
@@ -39,14 +40,17 @@ export default function Detail({ route }) {
               <View style={styles.containerInfo}>
                 <View>
                   <View style={styles.containerPrice}>
-                    <Text style={styles.price}>{item.pirce2}</Text>
+                    <Text style={styles.price}>
+                      {Helper.formatDollar(item.pirce2)}
+                    </Text>
                     <Text style={styles.d}>đ</Text>
                   </View>
 
                   <View style={styles.containerPrice}>
-                    <Text style={styles.price2}>{item.price}</Text>
+                    <Text style={styles.price2}>
+                      {Helper.formatDollar(item.price)}
+                    </Text>
                     <Text style={styles.d2}>đ</Text>
-                    <Text></Text>
                   </View>
                 </View>
                 <View style={styles.containerFavorite}>

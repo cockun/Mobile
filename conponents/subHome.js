@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   PointPropType,
+  SectionList,
 } from 'react-native';
 import Products from './products';
 import Header from './header';
@@ -13,8 +14,7 @@ import Categories from './categories';
 import { connect } from 'react-redux';
 
 import { callApi } from '../utils/apiCaller';
-import { actFetchProducts } from '../actions/index';
-import { FlatList } from 'react-native-gesture-handler';
+import { actFetchProducts, actFetchCategories } from '../actions/index';
 
 //const
 var { height, width } = Dimensions.get('window');
@@ -26,32 +26,39 @@ var { height, width } = Dimensions.get('window');
 class subHome extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      products: [
-        {
-          id: 1,
-          name: 'coc',
-        },
-      ],
-    };
+    this.DATA = [
+      {
+        data: ['Risotto'],
+      },
+    ];
   }
   componentDidMount() {
-    callApi('Products', 'GET', null).then((res) => {
+    callApi('Products?p=1&&l=50', 'GET', null).then((res) => {
       this.props.fetchAllProducts(res.data);
+    });
+    callApi('Categories?p=1&&l=50', 'GET', null).then((res) => {
+      this.props.fetchAllCategories(res.data);
     });
   }
 
   render() {
+    console.log(this.props);
     return (
       <View>
-        <ScrollView>
-          <View style={styles.container}>
-            <Header />
-            <Slider />
-            <Categories />
-            <Products />
-          </View>
-        </ScrollView>
+        <SectionList
+          sections={this.DATA}
+          keyExtractor={(item, index) => item + index}
+          renderItem={(item) => {
+            return (
+              <View style={styles.container}>
+                <Header />
+                <Slider />
+                <Categories />
+                <Products />
+              </View>
+            );
+          }}
+        />
       </View>
     );
   }
@@ -66,13 +73,17 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    products: state,
+    products: state.products,
+    categories: state.categories,
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchAllProducts: (products) => {
       dispatch(actFetchProducts(products));
+    },
+    fetchAllCategories: (category) => {
+      dispatch(actFetchCategories(category));
     },
   };
 };

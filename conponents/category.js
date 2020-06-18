@@ -13,8 +13,8 @@ console.log(width);
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    width: width * 0.4,
-    marginBottom: 33,
+    width: 120,
+    marginBottom: 24,
   },
   circle: {
     backgroundColor: '#f5f5ef',

@@ -1,5 +1,3 @@
-const { act } = require('react-test-renderer');
-
 var initialState = [];
 
 const products = (state = initialState, action) => {

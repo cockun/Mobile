@@ -8,19 +8,23 @@ import {
   ScrollView,
 } from 'react-native';
 var { height, width } = Dimensions.get('window');
+import { connect } from 'react-redux';
+
+import * as RootNavigation from '../utils/RootNavigation';
 
 import Category from './category';
 import suit from '../image/suit.png';
 import womanClothes from '../image/professional.png';
+import { Item } from './Item';
 
 const styles = StyleSheet.create({
   container: {
     width: width,
-    height: width * 0.85,
-    marginTop: 20,
-    marginBottom: 20,
-    borderRadius: 20,
-    marginHorizontal: 5,
+    height: 300,
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 9,
+
     backgroundColor: 'white',
     justifyContent: 'center',
   },
@@ -32,7 +36,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'orange',
     fontWeight: 'bold',
-    paddingLeft: 20,
+    paddingLeft: 15,
+    marginTop: 14,
   },
   categories: {
     flexDirection: 'column',
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Categories extends Component {
+export class Categories extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -49,25 +54,25 @@ export default class Categories extends Component {
         </View>
         <ScrollView horizontal={true}>
           <View style={styles.categories}>
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
-            <Category imgSource={suit} Title={'Thời Trang Nam'} />
+            {this.props.categories.map((item) => {
+              return (
+                <Category
+                  key={item.id}
+                  imgSource={{ uri: item.src }}
+                  Title={item.category}
+                />
+              );
+            })}
           </View>
         </ScrollView>
       </View>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+    categories: state.categories,
+  };
+};
+export default connect(mapStateToProps, null)(Categories);

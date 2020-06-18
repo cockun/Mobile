@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import { Helper } from '../utils/helper';
 
 var { height, width } = Dimensions.get('window');
 class Product extends Component {
@@ -14,17 +15,20 @@ class Product extends Component {
     const { title, image, price, price2 } = this.props;
     return (
       <View style={styles.container}>
-        <View>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
           <Image style={styles.imageProduct} source={{ uri: image }} />
-          <Text style={styles.title}>{title}</Text>
+          <Text numberOfLines={2} style={styles.title}>
+            {title}
+          </Text>
           <View style={styles.status}>
             <Text style={styles.price}>
               <Text style={styles.currency}>đ</Text>
-              {price}
+
+              {Helper.formatDollar(price)}
             </Text>
             <Text style={styles.price2}>
               <Text style={styles.currency}>đ</Text>
-              {price2}
+              {Helper.formatDollar(price2)}
             </Text>
           </View>
         </View>
@@ -35,14 +39,8 @@ class Product extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.47,
-    height: width * 0.59,
-    borderRadius: 5,
-    elevation: 2,
-    backgroundColor: 'white',
-    marginBottom: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 10,
+    flex: 1,
+    padding: 5,
   },
 
   imageProduct: {
@@ -58,8 +56,6 @@ const styles = StyleSheet.create({
   },
 
   status: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
     marginBottom: 10,
     marginHorizontal: 10,
   },

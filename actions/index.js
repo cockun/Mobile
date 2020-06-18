@@ -4,3 +4,9 @@ export const actFetchProducts = (products) => {
     products,
   };
 };
+export const actFetchCategories = (categories) => {
+  return {
+    type: 'FETCH_CATEGORIES',
+    categories,
+  };
+};

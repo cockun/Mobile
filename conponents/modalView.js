@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,11 +7,13 @@ import {
   Modal,
   TouchableHighlight,
   Button,
+  BackHandler,
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Coupon from './coupon';
 export function ModalView(props) {
   const [coupons, setCoupons] = useState([]);
+
   return (
     <Modal
       animationType="slide"
