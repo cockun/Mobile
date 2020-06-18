@@ -13,9 +13,6 @@ import { connect } from 'react-redux';
 import * as RootNavigation from '../utils/RootNavigation';
 
 import Category from './category';
-import suit from '../image/suit.png';
-import womanClothes from '../image/professional.png';
-import { Item } from './Item';
 
 const styles = StyleSheet.create({
   container: {
