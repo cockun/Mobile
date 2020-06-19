@@ -10,3 +10,9 @@ export const actFetchCategories = (categories) => {
     categories,
   };
 };
+export const actFetchCart = (cart) => {
+  return {
+    type: 'FETCH_CART',
+    cart,
+  };
+};

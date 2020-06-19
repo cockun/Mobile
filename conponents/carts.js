@@ -9,11 +9,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import image from '../image/suit.png';
 import ProductCart from './productCart';
+import { actFetchCart } from '../actions/index';
+import { connect } from 'react-redux';
 
 var firstTotal = 0;
-export default class Cart extends Component {
+export class Carts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,6 +58,7 @@ export default class Cart extends Component {
     this.setState({
       total: firstTotal,
     });
+    console.log(this.props);
   }
 
   render() {
@@ -76,48 +78,17 @@ export default class Cart extends Component {
 
         <View style={styles.list}>
           <ScrollView>
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
-            <ProductCart
-              name={name}
-              price={price}
-              image={image}
-              getTotal={this.callbackgetTotal}
-              getFirstTotal={this.callbackgetFirstTotal}
-            />
+            {this.props.cart.map((item) => {
+              return (
+                <ProductCart
+                  name={item.name}
+                  price={item.pirce2}
+                  image={item.src}
+                  getTotal={this.callbackgetTotal}
+                  getFirstTotal={this.callbackgetFirstTotal}
+                />
+              );
+            })}
           </ScrollView>
         </View>
 
@@ -136,6 +107,20 @@ export default class Cart extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchCart: (cart) => {
+      dispatch(actFetchCart(cart));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carts);
 
 const styles = StyleSheet.create({
   linearGradient: {

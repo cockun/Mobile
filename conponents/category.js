@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 var { height, width } = Dimensions.get('window');
-console.log(width);
+
+import * as RootNavigation from '../utils/RootNavigation';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,11 +36,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Category extends Component {
+export class Category extends Component {
   render() {
     const { imgSource, Title } = this.props;
+    let tmp = this.props.products.filter((item) =>
+      item.name.toLowerCase().includes(Title.toLowerCase())
+    );
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          RootNavigation.navigate('Search', { data: tmp });
+        }}
+      >
         <View style={styles.container}>
           <View style={styles.circle}>
             <Image
@@ -55,3 +64,10 @@ export default class Category extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  };
+};
+
+export default connect(mapStateToProps, null)(Category);

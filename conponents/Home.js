@@ -8,13 +8,22 @@ import ID from './ID';
 import Account from '../image/account.png';
 import homeImg from '../image/Home.png';
 import { callApi } from '../utils/apiCaller';
+
+import { actFetchCart } from '../actions/index';
+import { connect } from 'react-redux';
+import { Cart } from '../utils/cart';
+import HelloUser from './helloUser';
 const Tab = createBottomTabNavigator();
 
 class Home extends Component {
   componentDidMount() {
-    callApi('Products/2', 'GET', null).then((res) => {
-      this.setState(res);
-    });
+    const asyncStore = async () => {
+      let b = await Cart.getCart();
+      console.log(b);
+      this.props.fetchCart(b);
+    };
+
+    asyncStore();
   }
   render() {
     return (
@@ -40,7 +49,7 @@ class Home extends Component {
         }}
       >
         <Tab.Screen name="Trang Chủ" component={subHome} />
-        <Tab.Screen name="Tài Khoản" component={ID} />
+        <Tab.Screen name="Tài Khoản" component={HelloUser} />
       </Tab.Navigator>
     );
   }
@@ -53,4 +62,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchCart: (cart) => {
+      dispatch(actFetchCart(cart));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

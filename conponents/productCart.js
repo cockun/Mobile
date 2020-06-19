@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import imgDel from '../image/delete.png';
+
 import { min } from 'react-native-reanimated';
 
 export default class ProductCart extends Component {
@@ -98,13 +99,15 @@ export default class ProductCart extends Component {
               </View>
               <View style={styles.contImage}>
                 <Image
-                  source={image}
+                  source={{ uri: image }}
                   style={styles.image}
                   resizeMode="contain"
                 />
               </View>
               <View style={styles.detail}>
-                <Text style={styles.name}>{name}</Text>
+                <Text numberOfLines={2} style={styles.name}>
+                  {name}
+                </Text>
                 <Text style={styles.price}>
                   {this.formatString(this.state.total)} đ
                 </Text>

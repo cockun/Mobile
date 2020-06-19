@@ -11,10 +11,13 @@ import Products from './products';
 import Header from './header';
 import Slider from './slider';
 import Categories from './categories';
-import { connect } from 'react-redux';
-
 import { callApi } from '../utils/apiCaller';
-import { actFetchProducts, actFetchCategories } from '../actions/index';
+import {
+  actFetchCart,
+  actFetchProducts,
+  actFetchCategories,
+} from '../actions/index';
+import { connect } from 'react-redux';
 
 //const
 var { height, width } = Dimensions.get('window');
@@ -33,16 +36,16 @@ class subHome extends Component {
     ];
   }
   componentDidMount() {
-    callApi('Products?p=1&&l=50', 'GET', null).then((res) => {
+    callApi('Products?p=1&&l=60', 'GET', null).then((res) => {
       this.props.fetchAllProducts(res.data);
+      console.log(res.data);
     });
-    callApi('Categories?p=1&&l=50', 'GET', null).then((res) => {
+    callApi('Categories?p=1&&l60', 'GET', null).then((res) => {
       this.props.fetchAllCategories(res.data);
     });
   }
 
   render() {
-    console.log(this.props);
     return (
       <View>
         <SectionList
@@ -51,7 +54,7 @@ class subHome extends Component {
           renderItem={(item) => {
             return (
               <View style={styles.container}>
-                <Header />
+                <Header quantity={this.props.cart.length} />
                 <Slider />
                 <Categories />
                 <Products />
@@ -75,6 +78,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     categories: state.categories,
+    cart: state.cart,
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
@@ -84,6 +88,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     fetchAllCategories: (category) => {
       dispatch(actFetchCategories(category));
+    },
+    fetchCart: (cart) => {
+      dispatch(actFetchCart(cart));
     },
   };
 };

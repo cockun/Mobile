@@ -16,11 +16,29 @@ import freeshipImg from '../image/freeship.png';
 import { FooterDetail } from './footerDetail';
 import { ModalView } from './modalView';
 import { Helper } from '../utils/helper';
+import ModalAmount from './ModalAmount';
+import { act } from 'react-test-renderer';
 
 export default function Detail({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleAmount, setModalVisibleAmount] = useState({
+    action: '',
+    modalVisibleAmount: false,
+  });
   const handleModal = () => {
     setModalVisible(!modalVisible);
+  };
+  const handleModalAmount = () => {
+    setModalVisibleAmount({
+      ...modalVisibleAmount,
+      modalVisibleAmount: !modalVisibleAmount,
+    });
+  };
+  const handleModalAmount3 = (action) => {
+    setModalVisibleAmount({
+      action: action,
+      modalVisibleAmount: true,
+    });
   };
 
   const { item } = route.params;
@@ -204,9 +222,13 @@ export default function Detail({ route }) {
           </View>
         </ScrollView>
       </View>
-
+      <ModalAmount
+        modalVisibleAmount2={modalVisibleAmount}
+        handleModalAmount={handleModalAmount}
+        item2={item}
+      />
       <ModalView handleModal2={handleModal} modalVisible2={modalVisible} />
-      <FooterDetail />
+      <FooterDetail handleModalAmount2={handleModalAmount3} />
     </View>
   );
 }

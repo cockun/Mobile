@@ -12,24 +12,49 @@ import search from '../image/search.png';
 import cart from '../image/cart.png';
 import message from '../image/message.png';
 var { height, width } = Dimensions.get('window');
+import { actFetchProducts } from '../actions/index';
+import { connect } from 'react-redux';
+import * as RootNavigation from '../utils/RootNavigation';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+    };
+  }
+  componentDidMount() {}
+
   render() {
+    let tmp = this.props.products.filter((item) =>
+      item.name.toLowerCase().includes(this.state.value.toLowerCase())
+    );
     return (
       <View style={styles.container}>
         <View style={styles.searchForm}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              RootNavigation.navigate('Search', { data: tmp });
+            }}
+          >
             <Image style={styles.searchIcon} source={search} />
           </TouchableOpacity>
 
-          <TextInput style={styles.searchText} placeholder="set trang phục" />
+          <TextInput
+            value={this.state.value}
+            onChangeText={(text) => {
+              this.setState({ value: text });
+            }}
+            style={styles.searchText}
+            placeholder="Tìm kiếm"
+          />
         </View>
 
         <View style={styles.cartForm}>
           <TouchableOpacity style={styles.cartIcon}>
             <Image style={styles.cartIconSub} source={cart} />
             <View style={styles.circle}>
-              <Text style={styles.quantity}>2</Text>
+              <Text style={styles.quantity}>{this.props.quantity}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -112,4 +137,10 @@ const styles = StyleSheet.create({
     height: 30,
   },
 });
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

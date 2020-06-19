@@ -14,11 +14,23 @@ import { connect } from 'react-redux';
 import * as RootNavigation from '../utils/RootNavigation';
 
 class Products extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: 1,
+    };
+  }
+
   render() {
+    if (this.props.data) {
+      this.Data = this.props.data;
+    } else {
+      this.Data = this.props.products;
+    }
     return (
       <View style={{ paddingHorizontal: 3 }}>
         <FlatList
-          data={this.props.products}
+          data={this.Data}
           keyExtractor={(item) => item.id}
           numColumns={2}
           renderItem={({ item }) => {
