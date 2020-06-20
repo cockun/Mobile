@@ -12,8 +12,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProductCart from './productCart';
 import { actFetchCart } from '../actions/index';
 import { connect } from 'react-redux';
+import { Cart } from '../utils/cart';
+import { Helper } from '../utils/helper';
 
-var firstTotal = 0;
 export class Carts extends Component {
   constructor(props) {
     super(props);
@@ -21,50 +22,16 @@ export class Carts extends Component {
       total: 0,
     };
   }
-
-  formatString = (num) => {
-    num = num + '';
-
-    let count = 0,
-      res = '',
-      lastRes = '';
-    for (let i = num.length - 1; i >= 0; i--) {
-      count++;
-      res += num[i];
-
-      if (count == 3) {
-        res += '.';
-        count = 0;
-      }
-    }
-    for (let i = res.length - 1; i >= 0; i--) {
-      lastRes += res[i];
-    }
-    return lastRes;
+  asyncStore = async () => {
+    let b = await Cart.getCart();
+    this.props.fetchCart(b);
   };
-
-  callbackgetFirstTotal = (price) => {
-    firstTotal += price;
-  };
-
-  callbackgetTotal = (totalPrice) => {
-    let total = totalPrice + this.state.total;
-    this.setState({
-      total: total,
-    });
-  };
-
-  componentDidMount() {
-    this.setState({
-      total: firstTotal,
-    });
-    console.log(this.props);
-  }
 
   render() {
-    const name = 'Bàn Phím akko 3068 True WireLess';
-    const price = 1000000;
-
+    var total = 0;
+    this.props.cart.map((item) => {
+      total += item.quantity * item.pirce2;
+    });
     return (
       <LinearGradient
         colors={['#ffffff', '#ffffff']}
@@ -81,11 +48,9 @@ export class Carts extends Component {
             {this.props.cart.map((item) => {
               return (
                 <ProductCart
-                  name={item.name}
-                  price={item.pirce2}
-                  image={item.src}
-                  getTotal={this.callbackgetTotal}
-                  getFirstTotal={this.callbackgetFirstTotal}
+                  reLoad={this.asyncStore}
+                  data={item}
+                  key={item.id}
                 />
               );
             })}
@@ -95,9 +60,7 @@ export class Carts extends Component {
         <View style={styles.checkout}>
           <View style={styles.totalCont}>
             <Text style={{ fontSize: 15 }}>Tổng Cộng:</Text>
-            <Text style={styles.total}>
-              {this.formatString(this.state.total)} đ
-            </Text>
+            <Text style={styles.total}>{Helper.formatDollar(total)}</Text>
           </View>
           <TouchableOpacity style={styles.ibutton}>
             <Text style={styles.textButton}>THANH TOÁN</Text>

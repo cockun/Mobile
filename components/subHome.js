@@ -38,7 +38,6 @@ class subHome extends Component {
   componentDidMount() {
     callApi('Products?p=1&&l=60', 'GET', null).then((res) => {
       this.props.fetchAllProducts(res.data);
-      console.log(res.data);
     });
     callApi('Categories?p=1&&l60', 'GET', null).then((res) => {
       this.props.fetchAllCategories(res.data);

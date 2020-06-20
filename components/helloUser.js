@@ -40,11 +40,10 @@ export default class HelloUser extends Component {
               </View>
               <Text style={styles.optName}>Xem Giỏ Hàng</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.Option}
-              onPress={() => {
-                RootNavigation.navigate('s');
-              }}
+              onPress={() => RootNavigation.navigate('Update', null)}
             >
               <View style={styles.imgOptCont}>
                 <Image
@@ -55,6 +54,7 @@ export default class HelloUser extends Component {
               </View>
               <Text style={styles.optName}>Đổi Mật Khẩu</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.Option}
               onPress={() => RootNavigation.navigate('Login', null)}

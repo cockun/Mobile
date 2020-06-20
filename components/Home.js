@@ -19,7 +19,6 @@ class Home extends Component {
   componentDidMount() {
     const asyncStore = async () => {
       let b = await Cart.getCart();
-      console.log(b);
       this.props.fetchCart(b);
     };
 
