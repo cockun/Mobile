@@ -26,7 +26,6 @@ export class ProductCart extends Component {
     let a = this.props.data;
     const tmp = await Cart.deleteCartItem(a);
     this.props.fetchCart(tmp);
-    console.log(tmp);
   };
   upQuantity = async () => {
     await this.setState({

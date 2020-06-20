@@ -18,7 +18,7 @@ var date =
 var time =
   today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 var dateTime = date + ' ' + time;
-export default class CheckOut extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,9 +30,9 @@ export default class CheckOut extends Component {
   }
   addBill = () => {
     if (
-      this.state.name === '' ||
-      this.state.phone === '' ||
-      this.state.address === ''
+      this.state.name == '' ||
+      this.state.phone == '' ||
+      this.state.address == ''
     ) {
       Alert.alert('Bạn chưa nhập đủ thông tin. Xin kiểm tra lại!!!');
     } else {
@@ -45,134 +45,94 @@ export default class CheckOut extends Component {
         phone: this.state.phone,
         src: this.state.address,
       });
-      Alert.alert(
-        'Cảm ơn bạn đã ủng hộ Shop . Mong gặp lại bạn lần sau ahihihihihihi'
-      );
+      Alert.alert('Cảm ơn bạn đã ủng hộ Shop !!!');
     }
   };
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.header}>
-            <Text
-              style={{
-                alignSelf: 'center',
-                fontSize: 30,
-                fontWeight: 'bold',
-                color: 'white',
-              }}
-            >
-              THANH TOÁN
+        <View style={styles.header}>
+          <Text
+            style={{
+              alignSelf: 'center',
+              fontSize: 30,
+              fontWeight: 'bold',
+              color: 'white',
+            }}
+          >
+            THANH TOÁN
+          </Text>
+        </View>
+        <View style={styles.border1}>
+          <View>
+            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
+              Tổng Tiền : {Helper.formatDollar(this.props.route.params.total)}
+              vnđ
             </Text>
           </View>
-          <View style={styles.border1}>
-            <View>
-              <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
-                {' '}
-                Tổng Tiền : {Helper.formatDollar(
-                  this.props.route.params.total
-                )}{' '}
-                vnđ
-              </Text>
-            </View>
-          </View>
+        </View>
+
+        <View style={styles.box}>
           <Text style={styles.text}>Nhập thông tin </Text>
-          <View style={styles.box}>
-            <TextInput
-              style={styles.border2}
-              placeholder="Họ và tên"
-              onChangeText={(value) =>
-                this.setState({
-                  name: value,
-                })
-              }
-            />
-            <TextInput
-              style={styles.border2}
-              placeholder="Số điện thoại"
-              onChangeText={(value) =>
-                this.setState({
-                  phone: value,
-                })
-              }
-            />
-            <TextInput
-              style={styles.border2}
-              placeholder="Địa Chỉ"
-              onChangeText={(value) =>
-                this.setState({
-                  address: value,
-                })
-              }
-            />
-          </View>
-          <Text style={styles.text}>Chọn Phương thức thanh toán </Text>
-          <View style={styles.payment}>
-            <TouchableOpacity>
-              <View style={styles.compo}>
-                <Text style={{ padding: 15 }}>Shinhan</Text>
-                <Image
-                  style={styles.icon}
-                  source={require('../image/avatar.png')}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.compo}>
-                <Text style={{ padding: 15 }}>VietComBank</Text>
-                <Image
-                  style={styles.icon}
-                  source={require('../image/avatar.png')}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.compo}>
-                <Text style={{ padding: 15 }}>Argibank</Text>
-                <Image
-                  style={styles.icon}
-                  source={require('../image/avatar.png')}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.compo}>
-                <Text style={{ padding: 15 }}>MoMo</Text>
-                <Image
-                  style={styles.icon}
-                  source={require('../image/avatar.png')}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
+          <TextInput
+            style={styles.border2}
+            placeholder="Họ và tên"
+            onChangeText={(value) =>
+              this.setState({
+                name: value,
+              })
+            }
+          />
+          <TextInput
+            style={styles.border2}
+            placeholder="Số điện thoại"
+            onChangeText={(value) =>
+              this.setState({
+                phone: value,
+              })
+            }
+          />
+          <TextInput
+            style={styles.border2}
+            placeholder="Địa Chỉ"
+            onChangeText={(value) =>
+              this.setState({
+                address: value,
+              })
+            }
+          />
+
           <TouchableOpacity onPress={this.addBill}>
             <View style={styles.button}>
               <Text style={{ textAlign: 'center' }}> MUA HÀNG </Text>
             </View>
           </TouchableOpacity>
-        </ScrollView>
+        </View>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   header: {
-    height: 150,
+    flex: 2,
+
     backgroundColor: '#FF7F50',
     justifyContent: 'center',
   },
   border1: {
-    height: 100,
+    flex: 1,
     backgroundColor: 'white',
     paddingTop: 5,
-    borderWidth: 1,
+    borderBottomWidth: 0.5,
     justifyContent: 'center',
   },
   box: {
+    flex: 6,
     height: 200,
-
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
   },
@@ -217,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 50,
     backgroundColor: 'lightblue',
-    width: '80%',
+    width: 200,
     alignSelf: 'center',
     justifyContent: 'center',
   },

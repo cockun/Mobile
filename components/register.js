@@ -58,7 +58,7 @@ export default class Register extends Component {
         }
       }
     } else {
-      Alert.alert('Nhập đầy đủ vào thằng chó!');
+      Alert.alert('Vui lòng nhập đầy đủ thông tin!!!');
     }
   }
 
@@ -85,6 +85,7 @@ export default class Register extends Component {
             placeholder="Mật Khẩu"
             placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
             value={String(this.state.pass)}
+            secureTextEntry={true}
             onChangeText={(value2) => this.setState({ pass: value2 })}
           />
           <TextInput
@@ -92,6 +93,7 @@ export default class Register extends Component {
             placeholder="Nhập Lại Mật Khẩu"
             placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
             value={String(this.state.pass2)}
+            secureTextEntry={true}
             onChangeText={(value2) => this.setState({ pass2: value2 })}
           />
         </View>

@@ -17,8 +17,7 @@ import { FooterDetail } from './footerDetail';
 import { ModalView } from './modalView';
 import { Helper } from '../utils/helper';
 import ModalAmount from './ModalAmount';
-import { act } from 'react-test-renderer';
-
+import * as RootNavigation from '../utils/RootNavigation';
 export default function Detail({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleAmount, setModalVisibleAmount] = useState({
@@ -33,6 +32,9 @@ export default function Detail({ route }) {
       ...modalVisibleAmount,
       modalVisibleAmount: !modalVisibleAmount,
     });
+    if (modalVisibleAmount.action === 'buyNow') {
+      RootNavigation.navigate('Carts');
+    }
   };
   const handleModalAmount3 = (action) => {
     setModalVisibleAmount({
@@ -211,12 +213,7 @@ export default function Detail({ route }) {
                 <Text style={styles.fontStyle}>Mô tả sản phẩm</Text>
               </View>
               <View style={(styles.flex1, { paddingTop: 10 })}>
-                <Text>
-                  Tính năng: Loại mắt kính: Tính năng: Loại mắt kính: Tính năng:
-                  Loại mắt kính: Tính năng: Loại mắt kính: Tính năng: Loại mắt
-                  kính: Tính năng: Loại mắt kính: Tính năng: Loại mắt kính: Tính
-                  năng: Loại mắt kính: Tính năng: Loại mắt kính:
-                </Text>
+                <Text>{item.description}</Text>
               </View>
             </View>
           </View>

@@ -25,8 +25,8 @@ export default class Update extends Component {
   }
   async change() {
     if (
-      String(this.state.passnew) === String(this.state.passnew2) &&
-      this.state.pass !== ''
+      String(this.state.passnew) == String(this.state.passnew2) &&
+      this.state.pass != ''
     ) {
       let resp = await fetch(
         'https://5ee5aa77ddcea00016a37721.mockapi.io/Account'
@@ -37,27 +37,27 @@ export default class Update extends Component {
       let jus = 0;
       for (var i = 0; i < a; i++) {
         if (
-          String(this.state.name) === String(respJson[i].name) &&
-          String(this.state.pass) === String(respJson[i].password)
+          String(this.props.route.params.userName) ==
+            String(respJson[i].name) &&
+          String(this.state.pass) == String(respJson[i].password)
         ) {
           jus = respJson[i].id;
-          let jusa = 'Account/' + respJson[i].id;
-          console.log(jus);
+          let jusa = 'Account/' + jus;
           if (jus > 0) {
             callApi(jusa, 'PUT', {
               password: this.state.passnew,
             });
-            Alert.alert('thành công');
+            Alert.alert('Thành công');
             break;
           }
         } else {
-          if (i === a - 1) {
-            Alert.alert('Tài khoản hoặc mật khẩu sai ');
+          if (i == a - 1) {
+            Alert.alert('Nhập mật khẩu sai!!! ');
           }
         }
       }
     } else {
-      return Alert.alert('nhập lại mật khẩu mới sai');
+      return Alert.alert('Nhập lại mật khẩu mới sai');
     }
   }
 
@@ -74,14 +74,8 @@ export default class Update extends Component {
         <View style={styles.form}>
           <TextInput
             style={styles.info}
-            placeholder="Tài Khoản"
-            placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
-            value={String(this.state.name)}
-            onChangeText={(value2) => this.setState({ name: value2 })}
-          />
-          <TextInput
-            style={styles.info}
             placeholder="Mật Khẩu hiện tại"
+            secureTextEntry={true}
             placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
             value={String(this.state.pass)}
             onChangeText={(value2) => this.setState({ pass: value2 })}
@@ -89,6 +83,7 @@ export default class Update extends Component {
           <TextInput
             style={styles.info}
             placeholder="Mật khẩu mới"
+            secureTextEntry={true}
             placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
             value={String(this.state.passnew)}
             onChangeText={(value2) => this.setState({ passnew: value2 })}
@@ -96,6 +91,7 @@ export default class Update extends Component {
           <TextInput
             style={styles.info}
             placeholder="Nhập lại Mật khẩu mới"
+            secureTextEntry={true}
             placeholderTextColor={'rgba(255, 255, 255, 0.6)'}
             value={String(this.state.passnew2)}
             onChangeText={(value2) => this.setState({ passnew2: value2 })}

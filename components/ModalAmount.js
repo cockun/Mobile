@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { actFetchCart } from '../actions/index';
 import { connect } from 'react-redux';
@@ -15,14 +22,13 @@ export function ModalAmount(props) {
     });
     props.fetchCart(tmp);
     cancelModal();
-    alert('Thêm giỏ hàng thành công');
+    Alert.alert('Thêm giỏ hàng thành công');
   };
   const cancelModal = () => {
     props.handleModalAmount();
     setState(1);
   };
 
-  console.log(props.cart);
   return (
     <Modal
       animationType="slide"

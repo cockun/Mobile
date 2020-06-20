@@ -28,7 +28,7 @@ const banners = [event1, event2, event3, event4];
 export default class SwiperComponent extends Component {
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <View style={{ alignItems: 'center' }}>
           <Swiper
             style={{ height: 200 }}
@@ -43,6 +43,7 @@ export default class SwiperComponent extends Component {
                   key={index}
                   style={styles.imageBanner}
                   source={itembann}
+                  resizeMode="contain"
                 />
               );
             })}

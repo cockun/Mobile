@@ -7,18 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 export function FooterDetail(props) {
   let action = '';
   return (
-    <View style={[styles.row, { padding: 7 }]}>
-      <View style={styles.row}>
-        <View style={[styles.flexCenter, styles.item]}>
-          <FontAwesome5 name={'store'} style={{}} size={21} />
-          <Text>Cửa hàng</Text>
-        </View>
-        <View style={[styles.flexCenter, styles.item]}>
-          <FontAwesome5 name={'comments'} style={{}} size={21} />
-          <Text>Chat</Text>
-        </View>
-      </View>
-
+    <View style={[styles.row, { padding: 7, height: 65 }]}>
       <View style={[styles.row, styles.flexCenter, styles.flex1]}>
         <View
           style={[styles.flex1, { paddingVertical: 1, paddingHorizontal: 5 }]}

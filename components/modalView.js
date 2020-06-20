@@ -1,25 +1,20 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Modal,
   TouchableHighlight,
-  Button,
-  BackHandler,
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Coupon from './coupon';
 export function ModalView(props) {
-  const [coupons, setCoupons] = useState([]);
-
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={props.modalVisible2}
-      onRequestClose={() => {}}
     >
       <View style={[styles.flex1, styles.containerModal]}>
         <View style={styles.mainContentModal}>

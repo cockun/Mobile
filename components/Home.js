@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Image, Dimensions, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import subHome from './subHome';
-import ID from './ID';
 import Account from '../image/account.png';
 import homeImg from '../image/Home.png';
-import { callApi } from '../utils/apiCaller';
 
 import { actFetchCart } from '../actions/index';
 import { connect } from 'react-redux';
@@ -25,6 +22,9 @@ class Home extends Component {
     asyncStore();
   }
   render() {
+    const User = (props) => (
+      <HelloUser userName={this.props.route.params.userName} {...props} />
+    );
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -48,18 +48,13 @@ class Home extends Component {
         }}
       >
         <Tab.Screen name="Trang Chủ" component={subHome} />
-        <Tab.Screen name="Tài Khoản" component={HelloUser} />
+        <Tab.Screen name="Tài Khoản" component={User} />
       </Tab.Navigator>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 10,
-  },
-});
+const styles = StyleSheet.create({});
 
 const mapStateToProps = (state) => {
   return {

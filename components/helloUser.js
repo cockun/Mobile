@@ -18,7 +18,7 @@ import * as RootNavigation from '../utils/RootNavigation';
 
 export default class HelloUser extends Component {
   render() {
-    const name = 'userName';
+    const { userName } = this.props;
     return (
       <View style={styles.container}>
         <LinearGradient
@@ -40,10 +40,11 @@ export default class HelloUser extends Component {
               </View>
               <Text style={styles.optName}>Xem Giỏ Hàng</Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               style={styles.Option}
-              onPress={() => RootNavigation.navigate('Update', null)}
+              onPress={() =>
+                RootNavigation.navigate('Update', { userName: userName })
+              }
             >
               <View style={styles.imgOptCont}>
                 <Image
@@ -54,7 +55,6 @@ export default class HelloUser extends Component {
               </View>
               <Text style={styles.optName}>Đổi Mật Khẩu</Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               style={styles.Option}
               onPress={() => RootNavigation.navigate('Login', null)}
@@ -90,7 +90,7 @@ export default class HelloUser extends Component {
                 fontWeight: 'bold',
               }}
             >
-              {name}!
+              {userName}!
             </Text>
           </View>
         </View>
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: 90,
+    height: 90,
   },
 
   footer: {

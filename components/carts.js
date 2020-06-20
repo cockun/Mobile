@@ -14,6 +14,7 @@ import { actFetchCart } from '../actions/index';
 import { connect } from 'react-redux';
 import { Cart } from '../utils/cart';
 import { Helper } from '../utils/helper';
+import * as RootNavigation from '../utils/RootNavigation';
 
 export class Carts extends Component {
   constructor(props) {
@@ -62,7 +63,12 @@ export class Carts extends Component {
             <Text style={{ fontSize: 15 }}>Tổng Cộng:</Text>
             <Text style={styles.total}>{Helper.formatDollar(total)}</Text>
           </View>
-          <TouchableOpacity style={styles.ibutton}>
+          <TouchableOpacity
+            onPress={() =>
+              RootNavigation.navigate('Checkout', { total: total })
+            }
+            style={styles.ibutton}
+          >
             <Text style={styles.textButton}>THANH TOÁN</Text>
           </TouchableOpacity>
         </View>

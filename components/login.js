@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 import LinearGradient from 'react-native-linear-gradient';
 import React, { Component } from 'react';
 import {
@@ -30,17 +29,23 @@ export default class Login extends Component {
     let respJson = await resp.json();
     this.setState({ data: respJson });
     let a = parseInt(respJson.length);
+    let b = 0;
 
     for (var i = 0; i < a; i++) {
       if (
-        String(respJson[i].name) === String(this.state.name) &&
-        String(respJson[i].password) === String(this.state.pass)
+        String(respJson[i].name) == String(this.state.name) &&
+        String(respJson[i].password) == String(this.state.pass)
       ) {
         Alert.alert('Đăng nhập thành công');
+
         RootNavigation.navigate('Home', { userName: this.state.name });
+        this.setState({
+          name: '',
+          pass: '',
+        });
         break;
       }
-      if (i === a - 1) {
+      if (i == a - 1) {
         Alert.alert('Sai tài khoản hoặc mật khẩu');
         break;
       }

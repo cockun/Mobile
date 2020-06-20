@@ -37,7 +37,11 @@ class Header extends Component {
               RootNavigation.navigate('Search', { data: tmp });
             }}
           >
-            <Image style={styles.searchIcon} source={search} />
+            <Image
+              style={styles.searchIcon}
+              source={search}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
 
           <TextInput
@@ -51,14 +55,14 @@ class Header extends Component {
         </View>
 
         <View style={styles.cartForm}>
-          <TouchableOpacity style={styles.cartIcon}>
+          <TouchableOpacity
+            style={styles.cartIcon}
+            onPress={() => RootNavigation.navigate('Carts', null)}
+          >
             <Image style={styles.cartIconSub} source={cart} />
             <View style={styles.circle}>
               <Text style={styles.quantity}>{this.props.quantity}</Text>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.messIcon} source={message} />
           </TouchableOpacity>
         </View>
       </View>
@@ -73,28 +77,31 @@ const styles = StyleSheet.create({
     height: width / 9,
     margin: 10,
     marginBottom: 30,
+    borderRadius: 20,
   },
 
   searchForm: {
     flex: 7,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRightWidth: 0.4,
   },
 
   cartForm: {
-    flex: 3,
-    backgroundColor: 'pink',
+    flex: 1,
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 5,
   },
 
   searchIcon: {
     flex: 1,
-    width: 29,
-    height: 29,
+    width: 20,
+    height: 20,
     margin: 5,
   },
 

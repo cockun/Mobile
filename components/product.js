@@ -1,15 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import { Helper } from '../utils/helper';
 
-var { height, width } = Dimensions.get('window');
 class Product extends Component {
   render() {
     const { title, image, price, price2 } = this.props;
