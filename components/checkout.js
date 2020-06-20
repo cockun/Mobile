@@ -12,13 +12,18 @@ import {
 } from 'react-native';
 import { Helper } from '../utils/helper';
 import { callApi } from '../utils/apiCaller';
+import { Cart } from '../utils/cart';
+import { actFetchCart } from '../actions/index';
+import { connect } from 'react-redux';
+
+import * as RootNavigation from '../utils/RootNavigation';
 var today = new Date();
 var date =
   today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 var time =
   today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 var dateTime = date + ' ' + time;
-export default class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +50,10 @@ export default class App extends Component {
         phone: this.state.phone,
         src: this.state.address,
       });
+      Cart.clearCart();
+      this.props.fetchCart([]);
       Alert.alert('Cảm ơn bạn đã ủng hộ Shop !!!');
+      RootNavigation.navigate('Home');
     }
   };
   render() {
@@ -112,6 +120,21 @@ export default class App extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchCart: (cart) => {
+      dispatch(actFetchCart(cart));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

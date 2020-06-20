@@ -23,6 +23,7 @@ export class Carts extends Component {
       total: 0,
     };
   }
+
   asyncStore = async () => {
     let b = await Cart.getCart();
     this.props.fetchCart(b);
@@ -65,7 +66,9 @@ export class Carts extends Component {
           </View>
           <TouchableOpacity
             onPress={() =>
-              RootNavigation.navigate('Checkout', { total: total })
+              RootNavigation.navigate('Checkout', {
+                total: total,
+              })
             }
             style={styles.ibutton}
           >
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'pink',
+    borderRadius: 10,
   },
   total: {
     fontSize: 20,
